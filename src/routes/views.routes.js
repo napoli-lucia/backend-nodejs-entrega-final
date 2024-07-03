@@ -22,7 +22,7 @@ router.get("/", viewHomeProductsCtrl);
 router.get("/realTimeProducts", authMdw(["ADMIN"]), viewRealTimeProductsCtrl);
 
 //** Vista del chat **/
-router.get("/chat", authMdw(["USER"]), viewChatCtrl);
+router.get("/chat", authMdw(["USER","PREMIUM"]), viewChatCtrl);
 
 //** Vista de productos con paginacion y boton para agregar a carrito **/
 router.get("/products", authMdw(["USER","PREMIUM"]), viewProductsCtrl);
