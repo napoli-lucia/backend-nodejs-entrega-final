@@ -115,40 +115,40 @@ const buyCartCtrl = async (req, res, next) => {
 
         if (result.error) return httpResponse.BadRequest(res, result.error);
 
-        const userEmail = req.session.user.email;
-        req.logger.info(`User email: ${userEmail}`);
+        // const userEmail = req.session.user.email;
+        // req.logger.info(`User email: ${userEmail}`);
 
-        const message = {
-            from: GOOGLE_EMAIL,
-            to: userEmail,
-            subject: `Has finalizado tu compra en el ecommerce!`,
-            html: `
-            <div>
-              <h1>Felicitaciones por tu compra!</h1>
-              <p>
-              ${result.message}
+        // const message = {
+        //     from: GOOGLE_EMAIL,
+        //     to: userEmail,
+        //     subject: `Has finalizado tu compra en el ecommerce!`,
+        //     html: `
+        //     <div>
+        //       <h1>Felicitaciones por tu compra!</h1>
+        //       <p>
+        //       ${result.message}
               
-              <br/>
-              <br/>
-              Codigo Ticket: ${result.ticket.code}
-              <br/>
-              Monto: $${result.ticket.amount}
-              <br/>
-              <br/>
-              Esperamos que lo disfrute.
-              Saludos!
-              </p>
-              <br/>
-              Supermarket
-            </div>
-            `
-        };
-        let resultEmail = await transporter.sendMail(message);
+        //       <br/>
+        //       <br/>
+        //       Codigo Ticket: ${result.ticket.code}
+        //       <br/>
+        //       Monto: $${result.ticket.amount}
+        //       <br/>
+        //       <br/>
+        //       Esperamos que lo disfrute.
+        //       Saludos!
+        //       </p>
+        //       <br/>
+        //       Supermarket
+        //     </div>
+        //     `
+        // };
+        // let resultEmail = await transporter.sendMail(message);
 
-        if (resultEmail.rejected.length != 0) {
-            req.logger.error(`El email no se pudo enviar`);
-            return httpResponse.BadRequest(res, `El email no se pudo enviar`);
-        };
+        // if (resultEmail.rejected.length != 0) {
+        //     req.logger.error(`El email no se pudo enviar`);
+        //     return httpResponse.BadRequest(res, `El email no se pudo enviar`);
+        // };
 
         return httpResponse.OK(res, result.message);
 
