@@ -65,3 +65,45 @@ npm run start:prod
 ```
 npm run test
 ```
+
+## Rutas
+
+| METHOD                | ROUTE                                            |
+|-----------------------|--------------------------------------------------|
+| GET                   | /api                                             |
+| GET                   | /api/products/insertion                          |
+| GET                   | /api/products/mockingproducts                    |
+| GET POST              | /api/products                                    |
+| GET DELETE PUT        | /api/products/:pid                               |
+| POST                  | /api/carts                                       |
+| GET DELETE PUT        | /api/carts/:cid                                  |
+| POST DELETE PUT       | /api/carts/:cid/product/:pid                     |
+| POST                  | /api/carts/:cid/purchase                         |
+| GET                   | /                                                |
+| GET                   | /realTimeProducts                                |
+| GET                   | /chat                                            |
+| GET                   | /products                                        |
+| GET                   | /carts/:cid                                      |
+| GET POST              | /register                                        |
+| GET                   | /failregister                                    |
+| GET POST              | /login                                           |
+| GET                   | /faillogin                                       |
+| GET                   | /profile                                         |
+| GET                   | /changePsw                                       |
+| GET                   | /changePswMail                                   |
+| GET                   | /justAdmin                                       |
+| GET                   | /api/session/logout                              |
+| POST                  | /api/session/login                               |
+| POST                  | /api/session/register                            |
+| POST                  | /api/session/changePsw                           |
+| POST                  | /api/session/changePswMail                       |
+| GET                   | /api/session/github                              |
+| GET                   | /api/session/github/callback                     |
+| GET                   | /api/session/current                             |
+| GET DELETE            | /api/session                                     |
+| DELETE POST           | /api/session/:email                              |
+| GET                   | /api/loggerTest/error                            |
+| GET                   | /api/loggerTest/warning                          |
+| GET                   | /api/loggerTest/info                             |
+| GET                   | /api/loggerTest/http                             |
+| GET                   | /api/loggerTest/debug                            |

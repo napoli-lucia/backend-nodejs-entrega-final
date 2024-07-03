@@ -47,6 +47,7 @@ const httpServer = app.listen(PORT, () => {
     displayRoutes(app);
     console.log(`Server running on port ${PORT}`);
     console.log(`Environment: ${process.env.NODE_ENV}`);
+    console.log(`CLIENT_URL: ${process.env.CLIENT_URL}`);
   });
 
 const io = new Server(httpServer);

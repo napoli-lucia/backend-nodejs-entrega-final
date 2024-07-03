@@ -5,7 +5,7 @@ import jwt from "passport-jwt";
 import usersModel from "../dao/models/users.model.js"
 import { userService, cartService } from "../repository/index.js";
 import { SECRET_JWT } from "../utils/jwt.js";
-import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from "./config.js"
+import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, CLIENT_URL } from "./config.js"
 
 const localStrategy = local.Strategy;
 const JWTStrategy = jwt.Strategy;
@@ -93,7 +93,7 @@ const initializePassport = () => {
       {
         clientID: GITHUB_CLIENT_ID,
         clientSecret: GITHUB_CLIENT_SECRET,
-        callbackURL: "http://localhost:8080/api/session/github/callback",
+        callbackURL: `${CLIENT_URL}/api/session/github/callback`,
       },
       async (accessToken, refreshToken, profile, done) => {
         console.log("🚀 ~ profile:", profile);

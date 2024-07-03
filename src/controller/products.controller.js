@@ -122,13 +122,15 @@ const deleteProductByIdCtrl = async (req, res, next) => {
             subject: `Se ha eliminado un producto del que sos dueño en el ecommerce`,
             html: `
             <div>
-              <h1>Se ha eliminado su producto</h1>
               <p>
               Usted había creado un producto en el ecommerce.
               Le avisamos que se ha eliminado por parte del administrador.
-    
-              Saludos!
+              <br/>
+              <br/>
+              Disculpe las molestias, saludos!
               </p>
+              <br/>
+              Supermarket
             </div>
             `
         };
@@ -161,6 +163,7 @@ const addProductCtrl = async (req, res, next) => {
     try {
         let newProduct;
 
+        console.log("🚀 ~ addProductCtrl ~ req.session.user:", req.session);
         if (req.session.user.role === 'PREMIUM') {
             const userEmail = req.session.user.email;
             req.logger.info(`User email: ${userEmail}`);
@@ -175,6 +178,7 @@ const addProductCtrl = async (req, res, next) => {
         return httpResponse.OK(res, result.message);
 
     } catch (error) {
+        console.log("🚀 ~ addProductCtrl ~ error:", error);
         req.logger.error(`${error.message}`);
         if (error instanceof UniqueError) {
             return httpResponse.BadRequest(res, error.message);

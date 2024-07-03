@@ -6,8 +6,8 @@ class UserServiceDao {
 
     async getUser(email, password) {
         try {
-            if (email === "adminCoder@coder.com" && password === "admin") {
-                return { email, role: "ADMIN" }
+            if (email === "adminCoder@coder.com") {
+                return password === "admin" ? { email, role: "ADMIN" } : { error: `contrasena del admin incorrecta`, code: 403 };
             }
 
             const findUser = await usersModel.findOne({ email });
@@ -132,18 +132,14 @@ class UserServiceDao {
         }
     }
 
-    async deleteOldUsers() {
+    async deleteOldUsers(time) {
         try {
-            // const twoDaysAgo = new Date();
-            // twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
-
-            //Pruebas 5 minutos
-            const fiveMinutesAgo = new Date();
-            fiveMinutesAgo.setMinutes(fiveMinutesAgo.getMinutes() - 5);
+            const timeToDelete = new Date();
+            timeToDelete.setMinutes(timeToDelete.getHours() - time);
 
             const checkUsers = await usersModel.find({
                 $or: [
-                    { last_connection: { $lt: fiveMinutesAgo } }, //Usuarios con conexion hace mas de dos dias
+                    { last_connection: { $lt: timeToDelete } }, //Usuarios con conexion hace mas del tiempo dado
                     { last_connection: { $exists: false } }   //Usuarios que nunca se conectaron
                 ]
             }).select({
@@ -151,18 +147,19 @@ class UserServiceDao {
                 "_id": 0,
                 "cart": 0
             });
+            if(checkUsers.length===0) return { message: "No había usuarios para eliminar" };
             let deletedUsers = checkUsers.map(user => user.email);
 
             const result = await usersModel.deleteMany({
                 $or: [
-                    { last_connection: { $lt: fiveMinutesAgo } }, //Usuarios con conexion hace mas de dos dias
-                    { last_connection: { $exists: false } }   //Usuarios que nunca se conectaron
+                    { last_connection: { $lt: timeToDelete } },
+                    { last_connection: { $exists: false } }
                 ]
             });
             
             return result.deletedCount === 0 
-            ? { message: "No se eliminó ningun usuario" } 
-            : { message: "Se eliminaron los usuarios que no se conectaron en los últimos 2 días",
+            ? { message: "No había usuarios para eliminar" } 
+            : { message: `Se eliminaron los usuarios que no se conectaron en las últimos${time} horas`,
                 data: deletedUsers
             };
 

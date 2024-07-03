@@ -1,2 +1,18 @@
 {"level":"error","message":"Cannot read properties of undefined (reading 'cart')"}
 {"level":"error","message":"Cannot read properties of undefined (reading 'cart')"}
+{"level":"error","message":"Product id error"}
+{"level":"error","message":"GET: Limit error"}
+{"level":"error","message":"GET: Page error"}
+{"level":"error","message":"Not found"}
+{"level":"error","message":"deletedUsers is not iterable"}
+{"level":"error","message":"deletedUsers is not iterable"}
+{"level":"error","message":"deletedUsers is not iterable"}
+{"level":"error","message":"deletedUsers is not iterable"}
+{"level":"error","message":"Not found"}
+{"level":"error","message":"Not found"}
+{"level":"error","message":"Not found"}
+{"level":"error","message":"Not found"}
+{"level":"error","message":"No se pueden obtene al usuario\n Cast to date failed for value \"Invalid Date\" (type Date) at path \"last_connection\" for model \"users\""}
+{"level":"error","message":"No se puede obtener el carrito con id [object Object]\n Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"GOOGLE_EMAIL is not defined"}
+{"level":"error","message":"transporter is not defined"}

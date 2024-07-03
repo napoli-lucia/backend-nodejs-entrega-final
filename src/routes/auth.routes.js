@@ -57,7 +57,7 @@ router.get("/", authMdw(["ADMIN"]), getAllUsersCtrl);
 router.delete("/:email", authMdw(["ADMIN"]), deleteOneUserCtrl);
 
 // DELETE OLD USERS
-router.delete("/", authMdw(["ADMIN"]), deleteOldUsersCtrl);
+router.delete("/users/:time", authMdw(["ADMIN"]), deleteOldUsersCtrl);
 
 // CHANGE ROLE
 // router.post("/premium/:uid", changeRoleCtrl);

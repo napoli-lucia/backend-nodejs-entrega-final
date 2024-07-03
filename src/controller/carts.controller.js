@@ -1,4 +1,6 @@
 import { cartService } from "../repository/index.js";
+import { GOOGLE_EMAIL } from "../config/config.js"
+import { transporter } from "../utils/email.js";
 import { HttpResponse } from "../middleware/error-handle.js";
 const httpResponse = new HttpResponse();
 
@@ -111,7 +113,42 @@ const buyCartCtrl = async (req, res, next) => {
         // const result = await cartService.buyCart(req.params.cid);
         const result = await cartService.buyCart(req.user.user);
 
-        if (result.error) return httpResponse.NotFound(res, result.error);
+        if (result.error) return httpResponse.BadRequest(res, result.error);
+
+        const userEmail = req.session.user.email;
+        req.logger.info(`User email: ${userEmail}`);
+
+        const message = {
+            from: GOOGLE_EMAIL,
+            to: userEmail,
+            subject: `Has finalizado tu compra en el ecommerce!`,
+            html: `
+            <div>
+              <h1>Felicitaciones por tu compra!</h1>
+              <p>
+              ${result.message}
+              
+              <br/>
+              <br/>
+              Codigo Ticket: ${result.ticket.code}
+              <br/>
+              Monto: $${result.ticket.amount}
+              <br/>
+              <br/>
+              Esperamos que lo disfrute.
+              Saludos!
+              </p>
+              <br/>
+              Supermarket
+            </div>
+            `
+        };
+        let resultEmail = await transporter.sendMail(message);
+
+        if (resultEmail.rejected.length != 0) {
+            req.logger.error(`El email no se pudo enviar`);
+            return httpResponse.BadRequest(res, `El email no se pudo enviar`);
+        };
 
         return httpResponse.OK(res, result.message);
 

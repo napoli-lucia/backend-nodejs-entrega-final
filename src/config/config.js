@@ -2,6 +2,8 @@ import 'dotenv/config'
 
 export const PORT = process.env.PORT || 8080;
 
+export const CLIENT_URL = process.env.CLIENT_URL;
+
 export const {
     // PORT,
     API_PREFIX,

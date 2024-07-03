@@ -8,7 +8,7 @@
     <button type="submit">Logout</button>
   </form>
   <br />
-  <form method="get" action="http://localhost:8080/realTimeProducts">
+  <form method="get" action="/realTimeProducts">
     <button class="goToRealProds" type="submit">Productos en tiempo real</button>
   </form>
   <br />
@@ -41,7 +41,7 @@
         <option value="USER">USER</option>
         <option value="PREMIUM">PREMIUM</option>
       </select>
-      <form method="post" action="http://localhost:8080/api/session/{{this.email}}" id="changeRole-{{@index}}"
+      <form method="post" action="/api/session/{{this.email}}" id="changeRole-{{@index}}"
         class="changeRoleForm">
         <input type="hidden" name="role" value="{{this.role}}">
         <button class="roleButton" type="submit">Cambiar rol</button>

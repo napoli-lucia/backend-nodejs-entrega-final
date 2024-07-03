@@ -10,7 +10,7 @@
   <p>Edad: {{user.age}}</p>
   {{/if}}
   <p>Rol: {{user.role}}</p>
-  <form method="get" action="http://localhost:8080/profile">
+  <form method="get" action="/profile">
     <button class="prof" type="submit">Ver mi perfil</button>
   </form>
   <br />
@@ -18,15 +18,15 @@
     <button class="logOutButton" type="submit">Logout</button>
   </form>
   <br />
-  <form method="get" action="http://localhost:8080/carts/{{user.cart}}">
+  <form method="get" action="/carts/{{user.cart}}">
     <button class="myCartButton" type="submit">Ver mi carrito</button>
   </form>
   <br />
-  <form method="get" action="http://localhost:8080/realTimeProducts">
+  <form method="get" action="/realTimeProducts">
     <button class="goToRealProds" type="submit">Productos en tiempo real</button>
   </form>
   <br />
-  <form method="get" action="http://localhost:8080/chat">
+  <form method="get" action="/chat">
     <button class="chat" type="submit">Chat</button>
   </form>
   {{/if}}
@@ -71,7 +71,7 @@
         <li><b>Precio: ${{this.price}}</b></li>
       </ul>
     </div>
-    <form method="post" action="http://localhost:8080/api/carts/{{../user.cart}}/product/{{this.id}}" id="addToCart">
+    <form method="post" action="/api/carts/{{../user.cart}}/product/{{this.id}}" id="addToCart">
       <button class="cartButton" type="submit">Agregar a carrito</button>
     </form>
   </div>

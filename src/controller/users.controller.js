@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { generateJWT, SECRET_JWT } from "../utils/jwt.js";
 import { userService } from "../repository/index.js";
 import { transporter } from "../utils/email.js";
-import { TIME_EXPIRE_JWT_SESSION, TIME_EXPIRE_JWT_CHANGE_PSW, GOOGLE_EMAIL } from "../config/config.js"
+import { TIME_EXPIRE_JWT_SESSION, TIME_EXPIRE_JWT_CHANGE_PSW, GOOGLE_EMAIL, CLIENT_URL } from "../config/config.js"
 import { HttpResponse } from "../middleware/error-handle.js";
 const httpResponse = new HttpResponse();
 
@@ -161,12 +161,12 @@ const sendChangePswMailCtrl = async (req, res, next) => {
     //Genero el token para expirar en 1 hora
     const token = await generateJWT(foundUser, TIME_EXPIRE_JWT_CHANGE_PSW);
 
-    const changePswLink = `http://localhost:8080/changePsw?token=${token}`;
+    const changePswLink = `${CLIENT_URL}/changePsw?token=${token}`;
 
     let resultEmail = await transporter.sendMail({
       from: GOOGLE_EMAIL,
       to: emailReceiver,
-      subject: `PRUEBA01 Restablecer la contraseña de ${emailReceiver}`,
+      subject: `Restablecer la contraseña de ${emailReceiver}`,
       html: `
       <div>
         <h1>Restablecer la contraseña</h1>
@@ -275,10 +275,13 @@ const deleteOneUserCtrl = async (req, res) => {
 // DELETE USER BY ID
 const deleteOldUsersCtrl = async (req, res) => {
   try {
-    const result = await userService.deleteOldUsers();
-
+    const result = await userService.deleteOldUsers(Number(req.params.time));
+    
     const deletedUsers = result.data;
-
+    if (!deletedUsers) {
+      return httpResponse.OK(res, `No había usuarios para eliminar`);
+    };
+    
     for (const emailReceiver of deletedUsers) {
       let resultEmail = await transporter.sendMail({
         from: GOOGLE_EMAIL,
@@ -288,9 +291,14 @@ const deleteOldUsersCtrl = async (req, res) => {
         <div>
           <h1>Se ha eliminado su cuenta</h1>
           Usted se registró en el ecommerce con el email: ${emailReceiver}.
-          Se ha eliminado su cuenta por inactividad.
-
-          Esperamos que vuelva pronto!.
+          <br/>
+          Le avisamos que se ha eliminado su cuenta por inactividad.
+          <br/>
+          <br/>
+          Esperamos que vuelva pronto!
+          <br/>
+          <br/>
+          Supermarket
         </div>
         `
       });

@@ -7,11 +7,11 @@
 
   <h2>Mis productos</h2>
 
-  <form method="get" action="http://localhost:8080/products">
+  <form method="get" action="/products">
     <button class="goToProds" type="submit">Volver a home</button>
   </form>
 <br>
-  <form method="post" action="http://localhost:8080/api/carts/{{user.cart}}/purchase" id="purchaseCart">
+  <form method="post" action="/api/carts/{{user.cart}}/purchase" id="purchaseCart">
     <button class="purchaseButton" type="submit">Comprar carrito</button>
   </form>
 

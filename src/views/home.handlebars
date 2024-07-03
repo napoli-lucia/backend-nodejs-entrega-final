@@ -2,13 +2,23 @@
 
 <h1 class="thirteen">Supermarket</h1>
 
+<div class="container">
+  <h1>Bienvenido!</h1>
+  <form method="get" action="/login">
+    <button class="goToLogin" type="submit">Login</button>
+  </form>
+  <br>
+  <form method="get" action="/register">
+    <button class="goToRegister" type="submit">Register</button>
+  </form>
+</div>
+
 <h2>Productos</h2>
-
-
 {{#each products}}
 <div class="container">
   <div class="producto">
-      <img src={{this.thumbnails.[0]}} alt="Producto {{this.title}}" onerror="this.onerror=null; this.src='./images/no-image.jpg'; this.alt='image no available';">
+    <img src={{this.thumbnails.[0]}} alt="Producto {{this.title}}"
+      onerror="this.onerror=null; this.src='./images/no-image.jpg'; this.alt='image no available';">
     <div class="info">
       <ul class="product-list">
         <li><b>ID:</b> {{this._id}}</li>
@@ -23,4 +33,3 @@
   </div>
 </div>
 {{/each}}
-

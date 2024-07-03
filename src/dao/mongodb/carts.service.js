@@ -162,7 +162,12 @@ class CartServiceDao {
         console.log("🚀 ~ CartServiceDao ~ buyCart ~ user:", user);
         try {
             const cart = (await this.getCartById(user.cart))[0].products;
-            // console.log("🚀 ~ CartServiceDao ~ buyCart ~ cart:", cart);
+            //console.log("🚀 ~ CartServiceDao ~ buyCart ~ cart:", cart);
+            if (cart.length === 0){
+                return {
+                    error: "No tenes productos en tu carrito. No podes comprar",
+                };
+            }
 
             const { available, unavailable } = await this.#separateProducts(cart)
             // console.log("🚀 ~ CartServiceDao ~ buyCart ~ available:", available);
@@ -177,7 +182,7 @@ class CartServiceDao {
 
             const amount = await this.#getTotalAmountCart(available);
             // console.log("🚀 ~ CartServiceDao ~ buyCart ~ amount:", amount);
-
+            
             const purchaser = user.email;
             // console.log("🚀 ~ CartServiceDao ~ buyCart ~ purchaser:", purchaser);
 
@@ -188,15 +193,19 @@ class CartServiceDao {
             const updatedCart = await this.updateCart(user.cart, unavailable);
             console.log("🚀 ~ CartServiceDao ~ buyCart ~ updatedCart:", updatedCart);
 
+            
             if (unavailable.length === 0) {
                 return {
                     message: "Compra exitosa! No tenes productos pendientes.",
-                    ticket: ticket
+                    ticket: ticket,
+                    boughtProducts: available
                 };
             }
 
             return {
                 message: "Compra exitosa! Tenes productos pendientes en tu carrito debido a que no tenian stock.",
+                ticket: ticket,
+                boughtProducts: available,
                 productsUnavailable: unavailable
             };
 

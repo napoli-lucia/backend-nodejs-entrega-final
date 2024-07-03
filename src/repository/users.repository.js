@@ -36,7 +36,7 @@ export default class UserRepositoryDao {
     return this.dao.deleteUser(email);
   }
 
-  deleteOldUsers = async () => {
-    return this.dao.deleteOldUsers();
+  deleteOldUsers = async (time) => {
+    return this.dao.deleteOldUsers(time);
   }
 }
