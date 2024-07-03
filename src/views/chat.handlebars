@@ -1,0 +1,33 @@
+<title>Supermarket: Chat</title>
+
+<h1 class="thirteen">Supermarket</h1>
+
+<div class="container">
+  <h1>Chat Ecommerce</h1>
+  <form method="get" action="http://localhost:8080/products">
+    <button class="goToProds" type="submit">Volver a home</button>
+  </form>
+</div>
+
+<div id="chat-container" class="container">
+  <div id="chat-header">
+    <h3 id="nombreusuario">Usuario</h3>
+  </div>
+  <div id="chat-messages" class="containerMessages">
+    <div class="message-user">
+      <div class="user-info">
+        <div class="user-name"></div>
+      </div>
+      <p id="message-logs">...</p>
+    </div>
+  </div>
+  <form id="formulario">
+    <input type="text" name="message-input" id="message-input" placeholder="Ingrese su mensaje...">
+    <button id="send-message" type="submit">Enviar</button>
+
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chat.js"></script>

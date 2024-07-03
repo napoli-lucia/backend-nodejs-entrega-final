@@ -1,0 +1,79 @@
+<title>Supermarket: Real Time Products</title>
+
+<h1 class="thirteen">Supermarket</h1>
+
+<title>Real Time Products</title>
+
+<h1>Productos en tiempo real</h1>
+
+<div class="container">
+  <form method="get" action="http://localhost:8080/products">
+    <button class="goToProds" type="submit">Volver a home</button>
+  </form>
+  <br />
+  <form method="get" action="http://localhost:8080/justAdmin">
+    <button class="goToUsers" type="submit">Ver lista de usuarios</button>
+  </form>
+  <br />
+  <form action="/api/session/logout" method="get">
+    <button type="submit">Logout</button>
+  </form>
+</div>
+
+<h2>Ingrese un nuevo producto</h2>
+<form id="create-product" method="post" class="container">
+  <label>Titulo</label>
+  <input id="title" type="text" /><br />
+
+  <label>Descripcion</label>
+  <input id="description" type="text" /><br />
+
+  <label>Precio</label>
+  <input id="price" type="number" /><br />
+
+  <label>Status</label>
+  <input id="status" type="checkbox" value="true" /><br />
+
+  <label>Stock</label>
+  <input id="stock" type="number" /><br />
+
+  <label>Categoria</label>
+  <input id="category" type="text" /><br />
+
+  <input type="submit" value="Agregar">
+</form>
+
+<h2>Elimine un producto</h2>
+<form id="delete-product" method="delete" class="container">
+  <label>Id producto: </label>
+  <input id="product-id" type="text" />
+  <button id="send-delete">Eliminar</button>
+</form>
+
+<h2>Productos</h2>
+<div id="real-products" class="container">
+  {{#each products}}
+  <div class="container">
+    <div class="producto">
+      <img src={{this.thumbnails}} alt="Producto {{this.title}}"
+        onerror="this.onerror=null; this.src='./images/no-image.jpg'; this.alt='image no available';">
+      <div class="info">
+        <ul>
+          <li>ID: {{this._id}}</li>
+          <li>Titulo: {{this.title}}</li>
+          <li>Descripcion: {{this.description}}</li>
+          <li>Codigo: {{this.code}}</li>
+          <li>Stock: {{this.stock}}</li>
+          <li>Categoria: {{this.category}}</li>
+          <li>Owner: {{this.owner}}</li>
+          <li>Precio: ${{this.price}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>

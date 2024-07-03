@@ -1,0 +1,26 @@
+<title>Supermarket: Home</title>
+
+<h1 class="thirteen">Supermarket</h1>
+
+<h2>Productos</h2>
+
+
+{{#each products}}
+<div class="container">
+  <div class="producto">
+      <img src={{this.thumbnails.[0]}} alt="Producto {{this.title}}" onerror="this.onerror=null; this.src='./images/no-image.jpg'; this.alt='image no available';">
+    <div class="info">
+      <ul class="product-list">
+        <li><b>ID:</b> {{this._id}}</li>
+        <li><b>Titulo:</b> {{this.title}}</li>
+        <li><b>Descripcion:</b> {{this.description}}</li>
+        <li><b>Codigo:</b> {{this.code}}</li>
+        <li><b>Stock:</b> {{this.stock}}</li>
+        <li><b>Categoria:</b> {{this.category}}</li>
+        <li class="price"><b>Precio:</b> ${{this.price}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{{/each}}
+

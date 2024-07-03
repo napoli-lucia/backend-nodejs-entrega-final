@@ -1,0 +1,21 @@
+<title>Supermarket: Cambiar contraseña </title>
+
+<h1 class="thirteen">Supermarket</h1>
+
+<div class="container">
+  <h1>Cambio de contraseña</h1>
+
+  <div>
+    <form action="/api/session/changePsw?token={{token}}" method="post">
+
+      <label for="password">Nueva Contrasena</label>
+      <br />
+      <input type="password" name="new_password" id="new_password" placeholder="introduzca su nueva contrasena"
+        required />
+      <br />
+
+      <button type="submit">Actualizar contraseña</button>
+    </form>
+  </div>
+
+</div>
