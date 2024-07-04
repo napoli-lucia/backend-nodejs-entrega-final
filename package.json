@@ -5,9 +5,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "cross-env CLIENT_URL=https://backend-nodejs-entrega-final-production.up.railway.app node ./src/app",
     "start:dev": "cross-env NODE_ENV=development CLIENT_URL=http://localhost:8080 nodemon ./src/app",
-    "start:prod": "cross-env NODE_ENV=production CLIENT_URL=http://localhost:8080 nodemon ./src/app",
+    "start:prod": "cross-env NODE_ENV=production CLIENT_URL=https://backend-nodejs-entrega-final-production.up.railway.app node ./src/app",
     "test": "jest --config ./jest.config.json",
     "test:watch": "npm run test -- --watch"
   },

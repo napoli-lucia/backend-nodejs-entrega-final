@@ -162,7 +162,7 @@ class CartServiceDao {
         console.log("🚀 ~ CartServiceDao ~ buyCart ~ user:", user);
         try {
             const cart = (await this.getCartById(user.cart))[0].products;
-            //console.log("🚀 ~ CartServiceDao ~ buyCart ~ cart:", cart);
+            console.log("🚀 ~ CartServiceDao ~ buyCart ~ cart:", cart);
             if (cart.length === 0){
                 return {
                     error: "No tenes productos en tu carrito. No podes comprar",
@@ -170,8 +170,8 @@ class CartServiceDao {
             }
 
             const { available, unavailable } = await this.#separateProducts(cart)
-            // console.log("🚀 ~ CartServiceDao ~ buyCart ~ available:", available);
-            // console.log("🚀 ~ CartServiceDao ~ buyCart ~ unavailable:", unavailable);
+            console.log("🚀 ~ CartServiceDao ~ buyCart ~ available:", available);
+            console.log("🚀 ~ CartServiceDao ~ buyCart ~ unavailable:", unavailable);
 
             for (const item of available) {
                 const quantity = item.product.stock - item.quantity;
@@ -210,7 +210,7 @@ class CartServiceDao {
             };
 
         } catch (error) {
-            throw new Error(`No se puede finalizar la compra del carrito con id ${cid}\n ${error.message}`);
+            throw new Error(`No se puede finalizar la compra del carrito del usuario ${purchaser}\n ${error.message}`);
         }
     }
 
