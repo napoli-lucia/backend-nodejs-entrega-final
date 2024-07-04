@@ -1,3 +1,5 @@
+import crypto from "crypto";
+
 export default class TicketDTO {
     constructor(ticket) {
         this.code = crypto.randomUUID();

@@ -97,7 +97,7 @@ class CartServiceDao {
             return result.modifiedCount === 0 ? { error: "Not found" } : { message: `Se eliminó el producto con id ${pid}` };
 
         } catch (error) {
-            throw new Error(`No se puede eliminar el producto con id ${id}\n ${error.message}`);
+            throw new Error(`No se puede eliminar el producto con id ${pid}\n ${error.message}`);
         }
     }
 
@@ -108,11 +108,11 @@ class CartServiceDao {
                 { $set: { products: [] } },
             )
             //console.log("🚀 ~ CartManager ~ deleteAllInCart ~ result:", result)
-
+ 
             return result.matchedCount === 0 ? { error: "Not found" } : { message: `Se eliminaron todos los productos del carrito ${cid}` };
 
         } catch (error) {
-            throw new Error(`No se puede obtener el carrito con id ${id}\n ${error.message}`);
+            throw new Error(`No se puede obtener el carrito con id ${cid}\n ${error.message}`);
         }
     }
 
@@ -154,7 +154,7 @@ class CartServiceDao {
                 : { message: `Se actualizó el carrito con id ${cid}` };
 
         } catch (error) {
-            throw new Error(`No se puede actualizar el producto con id ${id}\n ${error.message}`);
+            throw new Error(`No se puede actualizar el producto con id ${cid}\n ${error.message}`);
         }
     }
 

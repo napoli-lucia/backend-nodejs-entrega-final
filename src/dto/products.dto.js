@@ -1,3 +1,5 @@
+import crypto from "crypto";
+
 export default class ProductDTO {
     constructor(product) {
         this.title = product.title;
