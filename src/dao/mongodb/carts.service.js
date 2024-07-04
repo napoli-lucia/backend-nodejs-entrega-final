@@ -172,6 +172,16 @@ class CartServiceDao {
             const { available, unavailable } = await this.#separateProducts(cart)
             console.log("🚀 ~ CartServiceDao ~ buyCart ~ available:", available);
             console.log("🚀 ~ CartServiceDao ~ buyCart ~ unavailable:", unavailable);
+            
+            const amount = await this.#getTotalAmountCart(available);
+            console.log("🚀 ~ CartServiceDao ~ buyCart ~ amount:", amount);
+            
+            const purchaser = user.email;
+            console.log("🚀 ~ CartServiceDao ~ buyCart ~ purchaser:", purchaser);
+            
+            const ticketDTO = new TicketDTO({ amount, purchaser });
+            const ticket = await ticketsModel.create(ticketDTO);
+            console.log("🚀 ~ CartServiceDao ~ buyCart ~ ticket:", ticket);
 
             for (const item of available) {
                 const quantity = item.product.stock - item.quantity;
@@ -179,16 +189,6 @@ class CartServiceDao {
                 // console.log("🚀 ~ CartServiceDao ~ buyCart ~ item:", item);
                 // console.log("🚀 ~ CartServiceDao ~ buyCart ~ updated:", updated);
             };
-
-            const amount = await this.#getTotalAmountCart(available);
-            // console.log("🚀 ~ CartServiceDao ~ buyCart ~ amount:", amount);
-            
-            const purchaser = user.email;
-            // console.log("🚀 ~ CartServiceDao ~ buyCart ~ purchaser:", purchaser);
-
-            const ticketDTO = new TicketDTO({ amount, purchaser });
-            const ticket = await ticketsModel.create(ticketDTO);
-            console.log("🚀 ~ CartServiceDao ~ buyCart ~ ticket:", ticket);
 
             const updatedCart = await this.updateCart(user.cart, unavailable);
             console.log("🚀 ~ CartServiceDao ~ buyCart ~ updatedCart:", updatedCart);
@@ -210,7 +210,7 @@ class CartServiceDao {
             };
 
         } catch (error) {
-            throw new Error(`No se puede finalizar la compra del carrito del usuario ${purchaser}\n ${error.message}`);
+            throw new Error(`No se puede finalizar la compra del carrito del usuario ${user.email}\n ${error.message}`);
         }
     }
 
