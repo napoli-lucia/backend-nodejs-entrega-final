@@ -29,7 +29,7 @@ docker-compose up
 npm install
 ```
 
-#### Para correr el proyecto localmente:
+#### Para correr el proyecto:
 ```
 npm run start:dev
 ```
@@ -44,6 +44,10 @@ npm run test
 
 ## Link Deploy Railway
 [Supermarket](https://backend-nodejs-entrega-final-production.up.railway.app/)
+
+#### Administrador Ecommerce
+Correo: adminCoder@coder.com
+Contraseña: admin
 
 ## Rutas
 

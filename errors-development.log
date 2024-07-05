@@ -16,3 +16,5 @@
 {"level":"error","message":"No se puede obtener el carrito con id [object Object]\n Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"carts\""}
 {"level":"error","message":"GOOGLE_EMAIL is not defined"}
 {"level":"error","message":"transporter is not defined"}
+{"level":"error","message":"No se puede obtener el carrito con id .no-image.jpg\n Cast to ObjectId failed for value \".no-image.jpg\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"No se puede obtener el carrito con id no-image.jpg\n Cast to ObjectId failed for value \"no-image.jpg\" (type string) at path \"_id\" for model \"carts\""}

@@ -1,5 +1,5 @@
 import productsData from "../data/products.init-data.js";
-import { UniqueError } from "../handle-errors/uniqueError.js"
+import { UniqueError } from "../errors/uniqueError.js"
 import { productService } from "../repository/index.js";
 import { generateProduct } from "../utils/generate-products.js";
 import {GOOGLE_EMAIL} from "../config/config.js"

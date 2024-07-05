@@ -58,7 +58,7 @@
 {{#each products}}
 <div class="container">
   <div class="producto">
-    <img src={{this.thumbnails}} alt="Producto {{this.title}}"
+    <img src={{this.thumbnails.[0]}} alt="Producto {{this.title}}"
       onerror="this.onerror=null; this.src='./images/no-image.jpg'; this.alt='image no available';">
     <div class="info">
       <ul class="product-list">

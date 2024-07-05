@@ -1,5 +1,5 @@
 import productsModel from "../models/products.model.js";
-import { UniqueError } from "../../handle-errors/uniqueError.js"
+import { UniqueError } from "../../errors/uniqueError.js"
 
 class ProductServiceDao {
 

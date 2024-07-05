@@ -10,7 +10,7 @@
   <form method="get" action="/products">
     <button class="goToProds" type="submit">Volver a home</button>
   </form>
-<br>
+  <br>
   <form method="post" action="/api/carts/{{user.cart}}/purchase" id="purchaseCart">
     <button class="purchaseButton" type="submit">Comprar carrito</button>
   </form>
@@ -21,9 +21,10 @@
 {{#each products}}
 <div class="container">
   <div class="producto">
-    <img src=".{{this.product.thumbnails}}" alt="Producto {{this.product.title}}">
+    <img src=".{{this.product.thumbnails}}" alt="Producto {{this.product.title}}"
+      onerror="this.onerror=null; this.src='../images/no-image.jpg'">
     <div class="info">
-      <ul>
+      <ul class="product-list">
         <li>ID: {{this.product.id}}</li>
         <li>Titulo: {{this.product.title}}</li>
         <li>Descripcion: {{this.product.description}}</li>
@@ -36,7 +37,17 @@
     </div>
     <div>
       <label>Cantidad: {{this.quantity}}</label>
+      <br>
+      <form method="post" action="/api/carts/{{../user.cart}}/product/{{this.product.id}}" id="addToCart">
+        <button class="cartButton" type="submit">Agregar uno más</button>
+      </form>
+      <br>
+      <button class="cartButtonDel" data-cart-id="{{../user.cart}}"
+        data-product-id="{{this.product.id}}">Eliminar</button>
     </div>
   </div>
 </div>
 {{/each}}
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/carts.js"></script>
